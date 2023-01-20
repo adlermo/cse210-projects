@@ -2,13 +2,13 @@ using Pastel;
 
 class Program
 {
+    static PromptHandler promptHandler = new PromptHandler();
+    static Journal journal = new Journal();
+    static bool session = true;
+
     static void Main(string[] args)
     {
-        Console.WriteLine("Welcome to Journal Program!");
-
-        bool session = true;
-        PromptHandler promptHandler = new PromptHandler();
-        Journal journal = new Journal();
+        Console.WriteLine("Welcome to Journal Program!".PastelBg(ColorScheme.KOMBU).Pastel(ColorScheme.YELLOW));
 
         while (session)
         {
@@ -33,27 +33,18 @@ class Program
 
                 case "3":
                     // Load Journal from a File
-                    try
-                    {
-                        Console.WriteLine("Enter filename to load:" + "(.ext will be ignored /\\.*/)".Pastel(ColorScheme.KOMBU));
-                        journal.LoadJournalFromFile(Console.ReadLine());
-                        // Console.WriteLine("File loaded!".Pastel(ColorScheme.GREEN));
-                    }
-                    catch (System.Exception)
-                    {
-                        Console.WriteLine("Couldn't load file! Please check the file.".Pastel(ColorScheme.RED));
-                    }
+                    LoadJournal();
                     break;
 
                 case "4":
                     // Save Journal in a File
-                    Console.WriteLine("Enter filename to save:" + "(.ext will be ignored /\\.*/)".Pastel(ColorScheme.KOMBU));
+                    Console.WriteLine("Enter filename to save:" + " (.ext will be ignored /\\.*/)".Pastel(ColorScheme.KOMBU));
                     journal.WriteJournalToFile(Console.ReadLine());
                     break;
 
                 case "5":
+                    Console.WriteLine("Finishing Your Session. Goodbye!".Pastel(ColorScheme.KOMBU));
                     session = false;
-                    Console.WriteLine("Quitting Journal Program. Goodbye!".Pastel(ColorScheme.KOMBU));
                     break;
 
                 default:
@@ -76,5 +67,19 @@ class Program
         Console.WriteLine("What do you want to do? ");
 
         return Console.ReadLine();
+    }
+
+    static void LoadJournal()
+    {
+        try
+        {
+            Console.WriteLine("Enter filename to load:" + " (.ext will be ignored /\\.*/)".Pastel(ColorScheme.KOMBU));
+            journal.LoadJournalFromFile(Console.ReadLine());
+            Console.WriteLine("File loaded!".Pastel(ColorScheme.GREEN));
+        }
+        catch (System.Exception)
+        {
+            Console.WriteLine("Couldn't load file! Please check the file.".Pastel(ColorScheme.RED));
+        }
     }
 }

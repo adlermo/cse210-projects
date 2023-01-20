@@ -1,3 +1,5 @@
+using Pastel;
+
 public class PromptHandler
 {
     List<Prompt> _promptList = new List<Prompt>();
@@ -11,7 +13,6 @@ public class PromptHandler
         this._promptList.Add(new Prompt("What was the strongest emotion I felt today?"));
         this._promptList.Add(new Prompt("If I had one thing I could do over today, what would it be?"));
         this._promptList.Add(new Prompt("Write an advice to your older self in 5 years:"));
-
         this._promptList.Add(new Prompt("How many cups of water did you drink today?"));
     }
 
@@ -25,9 +26,13 @@ public class PromptHandler
     Prompt handleDuplicated()
     {
         // When the user has used all Prompts we restart the list
-        if (this._promptList.Count().Equals(0)) { RecycleHistory(); }
+        if (this._promptList.Count() == 0)
+        {
+            Console.WriteLine("We've ran out of prompts. You'll receive repeated prompts from now!".Pastel(ColorScheme.YELLOW));
+            RecycleHistory();
+        }
 
-        int index = new Random().Next(1, this._promptList.Count());
+        int index = new Random().Next(0, this._promptList.Count() - 1);
         Prompt prompt = this._promptList[index];
 
         this._promptList.Remove(prompt);
@@ -38,7 +43,7 @@ public class PromptHandler
 
     void RecycleHistory()
     {
-        this._promptList = this._promptHistory;
+        this._promptList.AddRange(this._promptHistory);
 
         this._promptHistory.Clear();
     }
