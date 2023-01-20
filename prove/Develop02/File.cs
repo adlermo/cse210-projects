@@ -1,16 +1,32 @@
-
-
 public class File
 {
-    public List<Entry> _entries = new List<Entry>();
+    public File() { }
 
-    public File(string fileName)
+    public void SaveToFile(string filename, List<Entry> entries)
     {
-        // TODO: Read File and add each line to _entries as Entry
+        // EXCEEDING REQUIREMENTS: filename handling to save .csv only
+        using (StreamWriter writer = new StreamWriter($"{filename.Split('.')[0]}.csv"))
+        {
+            entries.ForEach(entry =>
+            {
+                writer.WriteLine(entry.GetEntry());
+            });
+        }
     }
 
-    public List<Entry> GetEntries()
+    public List<Entry> LoadFromFile(string filename)
     {
-        return _entries;
+        // EXCEEDING REQUIREMENTS: filename handling to load .csv only
+        string[] lines = System.IO.File.ReadAllLines($"{filename.Split('.')[0]}.csv");
+        List<Entry> loadedEntries = new List<Entry>();
+
+        foreach (string line in lines)
+        {
+            string[] attr = line.Split(';');
+
+            loadedEntries.Add(new Entry(attr[2], attr[1], attr[0]));
+        }
+
+        return loadedEntries;
     }
 }
