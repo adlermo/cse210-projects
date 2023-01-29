@@ -1,4 +1,5 @@
 using Pastel;
+// EXCEEDING REQUIREMENTS: Adding colors to console outputs
 
 public class Entry
 {
@@ -8,6 +9,7 @@ public class Entry
 
     // string _color;
 
+    // Base Constructor which receives only prompt and user input
     public Entry(string userEntry, string prompt)
     {
         this._userEntry = userEntry;
@@ -15,6 +17,7 @@ public class Entry
         this._dateTime = DateTime.Now.ToString();
     }
 
+    // Overloaded constructor which receives date as value (made to load from file)
     public Entry(string userEntry, string prompt, string date)
     {
         this._userEntry = userEntry;
@@ -22,6 +25,7 @@ public class Entry
         this._dateTime = date;
     }
 
+    // Displays my Entry object formatted correctly
     public void Display()
     {
         Console.WriteLine("——————————————————————————————————————————————————————————————————————".Pastel(ColorScheme.KOMBU));
@@ -29,6 +33,7 @@ public class Entry
         Console.WriteLine($"{this._userEntry}\n");
     }
 
+    // FormatEntry
     public string GetEntry()
     {
         return $"{this._dateTime};{this._prompt};{this._userEntry}";

@@ -1,4 +1,5 @@
 using Pastel;
+// EXCEEDING REQUIREMENTS: Adding color to console outputs
 
 class Program
 {
@@ -34,15 +35,18 @@ class Program
                 case "3":
                     // Load Journal from a File
                     LoadJournal();
+                    // EXCEEDING REQUIREMENTS: loading file from .csv
                     break;
 
                 case "4":
                     // Save Journal in a File
                     Console.WriteLine("Enter filename to save:" + " (.ext will be ignored /\\.*/)".Pastel(ColorScheme.KOMBU));
+                    // EXCEEDING REQUIREMENTS: saving file to .csv
                     journal.WriteJournalToFile(Console.ReadLine());
                     break;
 
                 case "5":
+                    // Quits the session
                     Console.WriteLine("Finishing Your Session. Goodbye!".Pastel(ColorScheme.KOMBU));
                     session = false;
                     break;

@@ -9,6 +9,7 @@ public class File
         {
             entries.ForEach(entry =>
             {
+                // Writes a string formatted Entry from the list to a line in the file
                 writer.WriteLine(entry.GetEntry());
             });
         }
@@ -22,8 +23,10 @@ public class File
 
         foreach (string line in lines)
         {
+            // Breaks my line into 3 pieces at least by using the separator ; (semicolon)
             string[] attr = line.Split(';');
 
+            // It initializes a list of Entry with data loaded from line
             loadedEntries.Add(new Entry(attr[2], attr[1], attr[0]));
         }
 
