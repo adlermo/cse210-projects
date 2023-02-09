@@ -10,7 +10,11 @@ class ScriptureService
 
     public void DisplayLibrary()
     {
-        this._library.ForEach(reference => reference.Display());
+        this._library.ForEach(reference =>
+        {
+            Console.Write($"{this._library.IndexOf(reference) + 1} — ");
+            reference.Display();
+        });
     }
 
     public Scripture ChooseRandom()
