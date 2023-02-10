@@ -1,22 +1,34 @@
 class HidingService
 {
-    static public HidingService getInstance() { return new HidingService(); }
+    static private HidingService _instance = new HidingService();
 
-    public Scripture RandomlyHideWords(Scripture scripture)
+    static public HidingService getInstance() { return _instance; }
+
+    public Scripture RandomlyHideWords(Scripture original)
     {
-        scripture.text.ForEach(verse =>
+        Scripture modified = new Scripture();
+        List<string> hiddenTexts = new List<string>();
+
+        original.text.ForEach(verse =>
         {
             string[] words = verse.Split(' ');
 
-            words[2] = new string('_', words[2].Count());
-            Console.WriteLine(words[2]);
-
+            for (int i = 0; i < 10; i++)
+            {
+                int wIndex = new Random().Next(words.Count());
+                if (!words[wIndex].Contains("_")) words[wIndex] = new string('_', words[2].Count());
+                else i -= 1;
+            }
             verse = String.Join(' ', words);
-            Console.WriteLine(verse);
+
+            hiddenTexts.Add(verse);
         });
 
-        scripture.DisplayWithVerse();
+        modified.book = original.book;
+        modified.chapter = original.chapter;
+        modified.verse = original.verse;
+        modified.text = hiddenTexts;
 
-        return scripture;
+        return modified;
     }
 }

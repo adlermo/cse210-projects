@@ -12,7 +12,7 @@ class Program
 
         while (true)
         {
-            // Console.Clear();
+            Console.Clear();
             reference.DisplayWithVerse();
             Console.WriteLine("\nEnter to continue. Type 'quit' to finish the program: ");
 
@@ -29,12 +29,14 @@ class Program
         Console.WriteLine("0 — Random Scripture.\n");
 
         Console.Write("Please enter the desired index: ");
-        return int.Parse(Console.ReadLine());
+        string userInput = Console.ReadLine();
+        if (userInput != "") return int.Parse(userInput);
+
+        return 0;
     }
 
     static Scripture continueHidding(Scripture original)
     {
-        HidingService hidingService = HidingService.getInstance();
-        return hidingService.RandomlyHideWords(original);
+        return HidingService.getInstance().RandomlyHideWords(original);
     }
 }
