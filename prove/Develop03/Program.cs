@@ -5,7 +5,9 @@ class Program
     static void Main(string[] args)
     {
         Scripture reference;
-
+        
+        // EXCEEDING REQUIREMENTS: Program read a JSON file
+        // and prompts the user to choose a scripture
         int userInput = showLibraryAndGetUserInput();
         if (userInput == 0) reference = service.ChooseRandom();
         else reference = service.ChooseOne(userInput - 1);
