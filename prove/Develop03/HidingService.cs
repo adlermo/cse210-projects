@@ -11,17 +11,16 @@ class HidingService
         Scripture modified = new Scripture();
         Regex validate = new Regex(@"[a-zA-Z.,!-;]");
 
-        bool isAllHidden = false;
-        while (!isAllHidden)
+        while (true)
         {
             Console.Clear();
             original.DisplayWithVerse();
             Console.WriteLine("\nEnter to continue. Type 'quit' to finish the program: ");
 
+            List<string> hiddenTexts = new List<string>();
+
             // Quits the loop and end the program
             if (Console.ReadLine() == "quit") break;
-
-            List<string> hiddenTexts = new List<string>();
 
             original.text.ForEach(verse =>
             {
@@ -33,7 +32,7 @@ class HidingService
                 for (int i = 0; i < words.Count(); i++)
                 {
                     // Chooses randomly true or false to hide each word
-                    bool shallHide = new Random().Next(0, 100) % 5 == 0 ? true : false;
+                    bool shallHide = new Random().Next(0, 100) % 3 == 0 ? true : false;
 
                     if (shallHide && !words[i].Contains("_"))
                     {
@@ -47,7 +46,6 @@ class HidingService
                 // Joining modified text verse
                 verse = String.Join(' ', words);
                 hiddenTexts.Add(verse);
-
             });
 
             modified.book = original.book;
@@ -57,16 +55,8 @@ class HidingService
 
             original = modified;
 
-            // Checks whether there's no longer words
-            if (!validate.IsMatch(String.Join("\n", hiddenTexts)))
-            {
-                isAllHidden = true;
-            }
-            // Or if there's words
-            else
-            {
-                isAllHidden = false;
-            }
+            // Checks whether there's no longer words to hide
+            if (!validate.IsMatch(String.Join("\n", hiddenTexts))) break;
         }
 
         Console.Clear();
