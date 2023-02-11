@@ -10,17 +10,7 @@ class Program
         if (userInput == 0) reference = service.ChooseRandom();
         else reference = service.ChooseOne(userInput - 1);
 
-        while (true)
-        {
-            Console.Clear();
-            reference.DisplayWithVerse();
-            Console.WriteLine("\nEnter to continue. Type 'quit' to finish the program: ");
-
-            // Quits the loop and end the program
-            if (Console.ReadLine() == "quit") break;
-
-            reference = continueHidding(reference);
-        }
+        continuousHidding(reference);
     }
 
     static int showLibraryAndGetUserInput()
@@ -35,8 +25,8 @@ class Program
         return 0;
     }
 
-    static Scripture continueHidding(Scripture original)
+    static void continuousHidding(Scripture original)
     {
-        return HidingService.getInstance().RandomlyHideWords(original);
+        HidingService.getInstance().RandomlyHideWords(original);
     }
 }

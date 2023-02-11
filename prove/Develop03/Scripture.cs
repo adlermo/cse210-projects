@@ -13,27 +13,14 @@ class Scripture
 
     public void Display()
     {
-        int size = this._verse.Count();
-        if (size == 1)
-            Console.WriteLine($"{this._book} {this._chapter}:{this._verse[0]}");
-        else
-        {
-            Console.WriteLine($"{this._book} {this._chapter}:{String.Join(",", this._verse)}");
-        }
+        Console.WriteLine($"{this._book} {this._chapter}:{String.Join(",", this._verse)}");
+
     }
 
     public void DisplayWithVerse()
     {
-        int size = this._verse.Count();
-        if (size == 1)
-        {
-            Console.WriteLine($"{this._book} {this._chapter}:{this._verse[0]}");
-            Console.WriteLine($"{this._text[0]}");
-        }
-        else
-        {
-            Console.WriteLine($"{this._book} {this._chapter}:{String.Join(",", this._verse)}");
-            Console.WriteLine($"{String.Join("\n", this._text)}");
-        }
+        Console.WriteLine($"{this._book} {this._chapter}:{String.Join(",", this._verse)}");
+        Console.WriteLine($"{String.Join("\n", this._text)}");
+
     }
 }

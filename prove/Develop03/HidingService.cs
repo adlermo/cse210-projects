@@ -1,34 +1,76 @@
+using System.Text.RegularExpressions;
+
 class HidingService
 {
     static private HidingService _instance = new HidingService();
 
     static public HidingService getInstance() { return _instance; }
 
-    public Scripture RandomlyHideWords(Scripture original)
+    public void RandomlyHideWords(Scripture original)
     {
         Scripture modified = new Scripture();
-        List<string> hiddenTexts = new List<string>();
+        Regex validate = new Regex(@"[a-zA-Z.,!-;]");
 
-        original.text.ForEach(verse =>
+        bool isAllHidden = false;
+        while (!isAllHidden)
         {
-            string[] words = verse.Split(' ');
+            Console.Clear();
+            original.DisplayWithVerse();
+            Console.WriteLine("\nEnter to continue. Type 'quit' to finish the program: ");
 
-            for (int i = 0; i < 10; i++)
+            // Quits the loop and end the program
+            if (Console.ReadLine() == "quit") break;
+
+            List<string> hiddenTexts = new List<string>();
+
+            original.text.ForEach(verse =>
             {
-                int wIndex = new Random().Next(words.Count());
-                if (!words[wIndex].Contains("_")) words[wIndex] = new string('_', words[2].Count());
-                else i -= 1;
+                // Splitting my verse text into an array of words
+                List<string> words = verse.Split(' ').ToList();
+
+                int hCount = 0;
+                // Iterate over all words
+                for (int i = 0; i < words.Count(); i++)
+                {
+                    // Chooses randomly true or false to hide each word
+                    bool shallHide = new Random().Next(0, 100) % 5 == 0 ? true : false;
+
+                    if (shallHide && !words[i].Contains("_"))
+                    {
+                        hCount += 1;
+                        words[i] = new string('_', words[i].Count());
+                    }
+
+                    if (hCount == 4) i = words.Count();
+                }
+
+                // Joining modified text verse
+                verse = String.Join(' ', words);
+                hiddenTexts.Add(verse);
+
+            });
+
+            modified.book = original.book;
+            modified.chapter = original.chapter;
+            modified.verse = original.verse;
+            modified.text = hiddenTexts;
+
+            original = modified;
+
+            // Checks whether there's no longer words
+            if (!validate.IsMatch(String.Join("\n", hiddenTexts)))
+            {
+                isAllHidden = true;
             }
-            verse = String.Join(' ', words);
+            // Or if there's words
+            else
+            {
+                isAllHidden = false;
+            }
+        }
 
-            hiddenTexts.Add(verse);
-        });
-
-        modified.book = original.book;
-        modified.chapter = original.chapter;
-        modified.verse = original.verse;
-        modified.text = hiddenTexts;
-
-        return modified;
+        Console.Clear();
+        original.DisplayWithVerse();
+        Console.WriteLine("\nI hope you memorized! But feel free to start it over.");
     }
 }
