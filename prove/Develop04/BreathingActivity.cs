@@ -1,9 +1,19 @@
 class BreathingActivity : Activity
 {
-    private string _name;
-    private string _description;
-    private int _duration;
-
     public BreathingActivity(string name, string description) : base(name, description) { }
+
+    public void BreathingExercise()
+    {
+        while (!base.IsActivityTimedUp())
+        {
+            Console.WriteLine();
+            Console.Write("Breath In! ");
+            DisplaySeconds(5);
+
+            Console.WriteLine();
+            Console.Write("Breath Out! ");
+            DisplaySeconds(6);
+        }
+    }
 
 }
