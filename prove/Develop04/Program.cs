@@ -32,8 +32,6 @@ class Program
             case 1:
                 {
                     BreathingActivity bAct = new BreathingActivity("Breathing", "This activity will help you relax by walking your through breathing in and out slowly. Clear your mind and focus on your breathing.");
-                    Console.Write("Please, enter the activity duration in seconds (default is 60s): ");
-                    bAct.SetDuration(int.TryParse(Console.ReadLine(), out int i) ? i : 60);
 
                     bAct.DisplayStartingMessage();
                     bAct.BreathingExercise();
@@ -44,8 +42,6 @@ class Program
             case 2:
                 {
                     ReflectionActivity rAct = new ReflectionActivity("Reflecting", "This activity will help you reflect on times in your life when you have shown strength and resilience. This will help you recognize the power you have and how you can use it in other aspects of your life.");
-                    Console.Write("Please, enter the activity duration in seconds (default is 60s): ");
-                    rAct.SetDuration(int.TryParse(Console.ReadLine(), out int i) ? i : 60);
 
                     rAct.DisplayStartingMessage();
                     rAct.DisplayClosingMessage();
@@ -54,8 +50,6 @@ class Program
             case 3:
                 {
                     ListingActivity lAct = new ListingActivity("Listing", "This activity will help you reflect on the good things in your life by having you list as many things as you can in a certain area.");
-                    Console.Write("Please, enter the activity duration in seconds (default is 60s): ");
-                    lAct.SetDuration(int.TryParse(Console.ReadLine(), out int i) ? i : 60);
 
                     lAct.DisplayStartingMessage();
                     lAct.DisplayClosingMessage();

@@ -15,7 +15,7 @@ class Activity
         this._startTime = DateTime.Now;
     }
 
-    public void SetDuration(int duration)
+    private void SetDuration(int duration)
     {
         this._duration = duration;
         this._elapsedTime = DateTime.Now;
@@ -27,17 +27,34 @@ class Activity
         Console.Clear();
         Console.WriteLine($"Welcome to the {this._name} Activity\n");
         Console.WriteLine($"{this._description}\n");
-        Console.WriteLine("\nGet ready!\n");
-        DisplaySeconds(3);
+
+        StartActivity();
     }
 
     public void DisplayClosingMessage()
     {
+        Console.WriteLine();
         Console.WriteLine("Well Done!\n");
+        DisplaySpinner(4);
+
+        Console.WriteLine();
         Console.WriteLine($"You have completed {this._duration} seconds of the {this._name} Activity\n");
-        DisplaySeconds(5);
+        DisplaySpinner(4);
+        Console.Clear();
+    }
+
+    private void StartActivity()
+    {
+        Console.Write("Please, enter the activity duration in seconds (default is 60s): ");
+        int durationInput = int.TryParse(Console.ReadLine(), out int i) ? i : 60;
 
         Console.Clear();
+        Console.Write("Get ready! ");
+        DisplaySeconds(3);
+        Console.WriteLine();
+
+        // As SetDuration starts the activity counter we're doing it the last
+        SetDuration(durationInput);
     }
 
     protected bool IsActivityTimedUp()
@@ -48,13 +65,45 @@ class Activity
         return this._expectedEndingTime < this._elapsedTime;
     }
 
-    public void DisplaySeconds(int s)
+    protected void DisplaySeconds(int s)
     {
         while (s > 0)
         {
             // ↶ ↺ ⟲ ⤹ ⤺ ⤻ ⤿ ⥀
             Console.Write($"{s}");
             Thread.Sleep(1000);
+            Console.Write("\b \b");
+
+            s--;
+        }
+    }
+
+    protected void DisplaySpinner(int s)
+    {
+        while (s > 0)
+        {
+            Thread.Sleep(200);
+
+            Console.Write("*");
+            Thread.Sleep(200);
+            Console.Write("\b \b");
+
+            Console.Write("**");
+            Thread.Sleep(200);
+            Console.Write("\b \b");
+            Console.Write("\b \b");
+
+            Console.Write("***");
+            Thread.Sleep(200);
+            Console.Write("\b \b");
+            Console.Write("\b \b");
+            Console.Write("\b \b");
+
+            Console.Write("****");
+            Thread.Sleep(200);
+            Console.Write("\b \b");
+            Console.Write("\b \b");
+            Console.Write("\b \b");
             Console.Write("\b \b");
 
             s--;
