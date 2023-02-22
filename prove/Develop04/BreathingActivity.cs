@@ -7,12 +7,14 @@ class BreathingActivity : Activity
         while (!base.IsActivityTimedUp())
         {
             Console.WriteLine();
-            Console.Write("Breath In! ");
+            Console.Write("Breath in... ");
             DisplaySeconds(5);
 
             Console.WriteLine();
-            Console.Write("Breath Out! ");
+            Console.Write("Breath out... ");
             DisplaySeconds(6);
+
+            Console.WriteLine();
         }
     }
 

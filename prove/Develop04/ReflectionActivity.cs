@@ -25,6 +25,5 @@ class ReflectionActivity : Activity
             Console.WriteLine($"> {service.GetRandomQuestion()}");
             DisplaySpinner(10);
         }
-        Console.WriteLine();
     }
 }
