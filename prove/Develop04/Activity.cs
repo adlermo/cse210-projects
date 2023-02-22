@@ -12,13 +12,15 @@ class Activity
     {
         this._name = name;
         this._description = description;
-        this._startTime = DateTime.Now;
     }
 
-    private void SetDuration(int duration)
+    protected int GetDuration() { return this._duration; }
+
+    protected void SetDuration(int duration)
     {
         this._duration = duration;
-        this._elapsedTime = DateTime.Now;
+        this._elapsedTime = DateTime.MinValue;
+        this._startTime = DateTime.Now;
         this._expectedEndingTime = this._startTime.AddSeconds(duration);
     }
 
@@ -34,11 +36,12 @@ class Activity
     public void DisplayClosingMessage()
     {
         Console.WriteLine();
-        Console.WriteLine("Well Done!\n");
-        DisplaySpinner(4);
+        Console.Write("Well Done! ");
+        DisplaySpinner(3);
 
         Console.WriteLine();
-        Console.WriteLine($"You have completed {this._duration} seconds of the {this._name} Activity\n");
+        Console.WriteLine();
+        Console.Write($"You have completed {this._duration} seconds of the {this._name} Activity");
         DisplaySpinner(4);
         Console.Clear();
     }
@@ -50,7 +53,7 @@ class Activity
 
         Console.Clear();
         Console.Write("Get ready! ");
-        DisplaySeconds(3);
+        DisplaySpinner(3);
         Console.WriteLine();
 
         // As SetDuration starts the activity counter we're doing it the last
@@ -82,24 +85,35 @@ class Activity
     {
         while (s > 0)
         {
-            Thread.Sleep(200);
-
-            Console.Write("*");
-            Thread.Sleep(200);
-            Console.Write("\b \b");
-
-            Console.Write("**");
-            Thread.Sleep(200);
-            Console.Write("\b \b");
-            Console.Write("\b \b");
-
-            Console.Write("***");
+            Console.Write("*   ");
             Thread.Sleep(200);
             Console.Write("\b \b");
             Console.Write("\b \b");
             Console.Write("\b \b");
+            Console.Write("\b \b");
 
-            Console.Write("****");
+            Console.Write("**  ");
+            Thread.Sleep(200);
+            Console.Write("\b \b");
+            Console.Write("\b \b");
+            Console.Write("\b \b");
+            Console.Write("\b \b");
+
+            Console.Write(" ** ");
+            Thread.Sleep(200);
+            Console.Write("\b \b");
+            Console.Write("\b \b");
+            Console.Write("\b \b");
+            Console.Write("\b \b");
+
+            Console.Write("  **");
+            Thread.Sleep(200);
+            Console.Write("\b \b");
+            Console.Write("\b \b");
+            Console.Write("\b \b");
+            Console.Write("\b \b");
+
+            Console.Write("   *");
             Thread.Sleep(200);
             Console.Write("\b \b");
             Console.Write("\b \b");
