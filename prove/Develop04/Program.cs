@@ -36,7 +36,6 @@ class Program
                     bAct.DisplayStartingMessage();
                     bAct.BreathingExercise();
                     bAct.DisplayClosingMessage();
-
                     break;
                 }
             case 2:
@@ -53,6 +52,7 @@ class Program
                     ListingActivity lAct = new ListingActivity("Listing", "This activity will help you reflect on the good things in your life by having you list as many things as you can in a certain area.");
 
                     lAct.DisplayStartingMessage();
+                    lAct.ListingExercise();
                     lAct.DisplayClosingMessage();
                     break;
                 }

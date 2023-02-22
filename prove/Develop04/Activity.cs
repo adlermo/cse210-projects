@@ -37,12 +37,12 @@ class Activity
     {
         Console.WriteLine();
         Console.Write("Well Done! ");
-        DisplaySpinner(3);
+        DisplaySpinner(2);
 
         Console.WriteLine();
         Console.WriteLine();
-        Console.Write($"You have completed {this._duration} seconds of the {this._name} Activity");
-        DisplaySpinner(4);
+        Console.WriteLine($"You have completed {this._duration} seconds of the {this._name} Activity");
+        DisplaySpinner(5);
         Console.Clear();
     }
 
