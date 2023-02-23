@@ -9,7 +9,8 @@ class Program
         while (opt != 4)
         {
             opt = Menu();
-            StartActivity(opt);
+            ChooseActivities(opt);
+            // EXCEEDING REQUIREMENTS: I created a handler to duplicated prompts
         }
     }
 
@@ -25,7 +26,7 @@ class Program
         return int.TryParse(Console.ReadLine(), out int i) ? i : 4;
     }
 
-    static void StartActivity(int option)
+    static void ChooseActivities(int option)
     {
         switch (option)
         {
