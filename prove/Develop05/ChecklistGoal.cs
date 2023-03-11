@@ -1,10 +1,7 @@
 class ChecklistGoal : Goal
 {
-    private int _bonusQualification;
-    private int _timesCompleted;
-    private int _bonusPoints;
-
-    public ChecklistGoal() : base()
+    public ChecklistGoal() : base() { this._timesCompleted = 0; }
+    public ChecklistGoal(bool initialize) : base(initialize)
     {
         this._timesCompleted = 0;
 
@@ -22,9 +19,8 @@ class ChecklistGoal : Goal
         if (this._bonusQualification == this._timesCompleted)
         {
             this._completed = true;
-            return this._points + this._bonusPoints;
+            return this._points + (int)this._bonusPoints;
         }
-
 
         return this._points;
     }

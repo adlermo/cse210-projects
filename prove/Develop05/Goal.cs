@@ -4,9 +4,26 @@ class Goal
     private string _description;
     protected int _points;
     protected bool _completed;
+    protected int? _bonusQualification;
+    protected int? _timesCompleted;
+    protected int? _bonusPoints;
 
-    public Goal()
+    // Class Properties for JSON Serializer / Deserializer
+    public string type { get; set; }
+    public string name { get { return _name; } set { _name = value; } }
+    public string description { get { return _description; } set { _description = value; } }
+    public int points { get { return _points; } set { _points = value; } }
+    public bool completed { get { return _completed; } set { _completed = value; } }
+    public int? bonusPoints { get { return _bonusPoints; } set { _bonusPoints = value; } }
+    public int? bonusQualification { get { return _bonusQualification; } set { _bonusQualification = value; } }
+    public int? timesCompleted { get { return _timesCompleted; } set { _timesCompleted = value; } }
+
+
+    public Goal() { type = this.GetType().ToString(); }
+    public Goal(bool initialize)
     {
+        type = this.GetType().ToString();
+
         Console.Write("Enter the name for your goal: ");
         this._name = Console.ReadLine();
 

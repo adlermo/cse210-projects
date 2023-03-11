@@ -10,9 +10,9 @@ class FileHandler
         return JsonSerializer.Deserialize<T>(text);
     }
 
-    public void Write<T>(string file, T goals)
+    public void Write<T>(string file, T quest)
     {
-        string text = JsonSerializer.Serialize<T>(goals);
+        string text = JsonSerializer.Serialize<T>(quest);
         File.WriteAllText($"{file.Split(".")[0]}.json", text);
     }
 }

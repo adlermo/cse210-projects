@@ -2,12 +2,25 @@ class Program
 {
     static GoalService service = new GoalService();
 
+    // EXCEEDING REQUIREMENTS: I created an autosave and autoload feature
     static void Main(string[] args)
     {
         int opt = 0;
 
+        if (File.Exists("autosave.json"))
+        {
+            Console.WriteLine("We identified you have a autosave from last session.");
+            Console.WriteLine("Do you wish to continue last session data 'autosave.json'? (y/N)");
+            string confirm = Console.ReadLine().ToLower();
+            if (confirm != "" && !confirm.StartsWith("n".ToLower())) service.LoadFile("autosave");
+        }
+
         while (opt != 6)
         {
+            Console.WriteLine();
+            Console.WriteLine($"You have {service.GetScore()} points.");
+            Console.WriteLine();
+
             opt = MenuOption();
 
             Action(opt);
@@ -41,11 +54,11 @@ class Program
                 break;
 
             case 3:
-
+                service.SaveFile(null);
                 break;
 
             case 4:
-
+                service.LoadFile(null);
                 break;
 
             case 5:
@@ -55,6 +68,13 @@ class Program
             case 6:
                 Console.WriteLine();
                 Console.WriteLine("Quitting Program...");
+
+                // Only autosaving progress if there's a score
+                if (service.GetScore() > 0)
+                {
+                    Console.WriteLine("Auto saving progress as 'autosave.json'...");
+                    service.SaveFile("autosave");
+                }
                 break;
 
             default:

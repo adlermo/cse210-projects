@@ -1,0 +1,36 @@
+{
+  "score": 1320,
+  "level": 1,
+  "goals": [
+    {
+      "type": "Simple",
+      "name": "Finish Goal Manager",
+      "description": "I should finish the Goal Manager assignment and submit it",
+      "points": 70,
+      "completed": false,
+      "bonusPoints": null,
+      "bonusQualification": null,
+      "timesCompleted": null
+    },
+    {
+      "type": "ChecklistGoal",
+      "name": "Learn Handstand",
+      "description": "In order to learn handstand I must do 20 days of muscles preparation",
+      "points": 10,
+      "completed": false,
+      "bonusPoints": 250,
+      "bonusQualification": 20,
+      "timesCompleted": 2
+    },
+    {
+      "type": "EternalGoal",
+      "name": "Practice Juggling",
+      "description": "To improve my mind and reflexes I have to practice juggling everyday",
+      "points": 15,
+      "completed": false,
+      "bonusPoints": null,
+      "bonusQualification": null,
+      "timesCompleted": null
+    }
+  ]
+}
