@@ -1,10 +1,17 @@
-using System;
-
 class Program
 {
+    static GoalService service = new GoalService();
+
     static void Main(string[] args)
     {
+        int opt = 0;
 
+        while (opt != 6)
+        {
+            opt = MenuOption();
+
+            Action(opt);
+        }
     }
 
     static int MenuOption()
@@ -26,22 +33,28 @@ class Program
         switch (option)
         {
             case 1:
-
+                service.CreateGoal();
                 break;
+
             case 2:
-
+                service.PrintGoals();
                 break;
+
             case 3:
 
                 break;
+
             case 4:
 
                 break;
+
             case 5:
-
+                service.CompleteGoal();
                 break;
-            case 6:
 
+            case 6:
+                Console.WriteLine();
+                Console.WriteLine("Quitting Program...");
                 break;
 
             default:

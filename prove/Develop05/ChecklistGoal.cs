@@ -1,19 +1,38 @@
 class ChecklistGoal : Goal
 {
     private int _bonusQualification;
-    private int _completionCounter;
+    private int _timesCompleted;
     private int _bonusPoints;
 
-    public ChecklistGoal() : base() { }
+    public ChecklistGoal() : base()
+    {
+        this._timesCompleted = 0;
+
+        Console.Write("Enter how many times to complete for a bonus: ");
+        this._bonusQualification = int.Parse(Console.ReadLine());
+
+        Console.Write("The amount of bonus points you'll get: ");
+        this._bonusPoints = int.Parse(Console.ReadLine());
+    }
 
     public override int CompleteGoal()
     {
-        if (_bonusQualification == _completionCounter)
+        ++this._timesCompleted;
+
+        if (this._bonusQualification == this._timesCompleted)
         {
-            _completed = true;
-            return _points + _bonusPoints;
+            this._completed = true;
+            return this._points + this._bonusPoints;
         }
 
-        return _points;
+
+        return this._points;
+    }
+
+    public override string DisplayFormatted()
+    {
+        string mark = this._completed ? "X" : " ";
+
+        return $"[{mark}] {this.GetName()} — {this.GetDescription()} | {this._timesCompleted}/{this._bonusQualification} completed";
     }
 }
