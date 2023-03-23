@@ -11,7 +11,11 @@ class MediaPlayer
     public MediaPlayer()
     {
         Console.WriteLine(_currentPlaylist.Count());
-        if (_currentPlaylist.Count() - 1 > 0) _currentTrack = _currentPlaylist[0];
+        if (_currentPlaylist.Count() - 1 > 0)
+        {
+            _currentPlaylist.Add(new Media("Povos", "Adler", "Sunday"));
+            _currentTrack = _currentPlaylist[0];
+        }
     }
 
     public void GetNextTrack()
@@ -55,9 +59,9 @@ class MediaPlayer
     private void Play()
     {
         _isPlaying = true;
-        _currentTrack.SetAudio(new BasicAudio.AudioPlayer());
-        _currentTrack.GetAudio().Filename = "./media/Medley-A.mp3";
-        _currentTrack.GetAudio().Play();
+        var audioP = new AudioPlayer();
+        audioP.Filename = "media/Medley-A.mp3";
+        audioP.Play();
     }
     private void Pause() { _isPlaying = false; }
 }
