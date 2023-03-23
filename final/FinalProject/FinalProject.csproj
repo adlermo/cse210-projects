@@ -8,4 +8,8 @@
     <Nullable>disable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="BasicAudio" Version="2022.11.30.1" />
+  </ItemGroup>
+
 </Project>
