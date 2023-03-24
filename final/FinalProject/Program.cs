@@ -19,12 +19,7 @@ class Program
         Console.WriteLine("You are using ConsoleMediaPlayer. Your minimalist Media Player!");
         Console.WriteLine();
 
-        Console.WriteLine("1. Play/Pause (|>/||)");
-        Console.WriteLine("2. Stop ([])");
-        Console.WriteLine("3. Next (>>|)");
-        Console.WriteLine("4. Prev (|<<)");
-        Console.WriteLine("5. Library (===)");
-        Console.WriteLine("0. Close Player (X)");
+        player.DisplayMenu();
 
         Console.WriteLine();
         Console.Write("Please, choose an option from the list above: ");

@@ -1,26 +1,38 @@
-using BasicAudio;
+using NAudio.Wave;
 
 class MediaPlayer
 {
     private Media _currentTrack;
     private bool _isPlaying;
-
+    private WaveOutEvent _outputDevice;
     private List<Media> _currentPlaylist = new List<Media>();
     public void SetPlaylist(List<Media> playlist) { _currentPlaylist = playlist; Play(); }
 
     public MediaPlayer()
     {
-        Console.WriteLine(_currentPlaylist.Count());
-        if (_currentPlaylist.Count() - 1 > 0)
+        _outputDevice = new WaveOutEvent();
+
+        Console.WriteLine(_currentPlaylist.Count);
+        if (_currentPlaylist.Count - 1 < 0)
         {
-            _currentPlaylist.Add(new Media("Povos", "Adler", "Sunday"));
+            _currentPlaylist.Add(new Media("media/Medley-A.mp3", "Povos", "Adler", "Sunday"));
             _currentTrack = _currentPlaylist[0];
         }
     }
 
+    public void DisplayMenu()
+    {
+        Console.WriteLine($"1. {(!_isPlaying ? "Play (|>)" : "Pause (||)")}");
+        Console.WriteLine("2. Next (>>|)");
+        Console.WriteLine("3. Prev (|<<)");
+        Console.WriteLine("4. Stop ([])");
+        Console.WriteLine("5. Library (===)");
+        Console.WriteLine("0. Quit Player (X)");
+    }
+
     public void GetNextTrack()
     {
-        if (_currentPlaylist.Count() - 1 > 0)
+        if (_currentPlaylist.Count - 1 > 0)
         {
             int i = _currentPlaylist.IndexOf(_currentTrack);
 
@@ -34,7 +46,7 @@ class MediaPlayer
 
     public void GetPrevTrack()
     {
-        if (_currentPlaylist.Count() - 1 > 0)
+        if (_currentPlaylist.Count - 1 > 0)
         {
             int i = _currentPlaylist.IndexOf(_currentTrack);
 
@@ -54,14 +66,26 @@ class MediaPlayer
         }
     }
 
-    public void Stop() { _isPlaying = false; _currentTrack = null; }
-    public void PlayOrPause() { if (_isPlaying) Pause(); else Play(); }
+    public bool PlayOrPause() { if (_isPlaying) Pause(); else Play(); return _isPlaying; }
+
     private void Play()
     {
+        if (_outputDevice.PlaybackState.ToString() != "Paused")
+        {
+            var audioFile = new AudioFileReader(_currentTrack.GetPath());
+            _outputDevice.Init(audioFile);
+        }
+        _outputDevice.Play();
+
         _isPlaying = true;
-        var audioP = new AudioPlayer();
-        audioP.Filename = "media/Medley-A.mp3";
-        audioP.Play();
     }
-    private void Pause() { _isPlaying = false; }
+
+    private void Pause()
+    {
+        _outputDevice.Pause();
+        _isPlaying = false;
+    }
+
+    // Stopping the player
+    public void Stop() { _isPlaying = false; _currentTrack = null; _outputDevice.Stop(); }
 }
